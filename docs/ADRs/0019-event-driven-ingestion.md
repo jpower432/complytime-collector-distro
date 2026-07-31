@@ -18,6 +18,7 @@ The API is designed to serve multiple independent consumer systems, each with it
 * Multiple consumers may independently process the same ingestion event for different purposes.
 * Missed events mean consumers operate on stale or incomplete evidence.
 * The ComplyTime API should not dictate or depend on consumer behavior.
+* Consumers may operate in environments with intermittent connectivity; the pattern must not require persistent producer-consumer reachability.
 
 ## Considered Options
 
@@ -40,6 +41,7 @@ The ComplyTime API publishes an ingestion event for every stored evidence object
 * Good, because retry and dead-letter logic is handled by the bus, not the ComplyTime API.
 * Bad, because operating an event bus adds infrastructure complexity.
 * Bad, because at-least-once delivery requires consumers to handle duplicate events idempotently.
+* Neutral, because the event bus technology and delivery mechanism must support backpressure control and consumers with intermittent connectivity.
 
 ## Pros and Cons of the Options
 
@@ -69,9 +71,11 @@ The ComplyTime API maintains a registry of consumer endpoints and pushes HTTP ca
 * Bad, because the ComplyTime API must own consumer lifecycle: registration, health checks, retry.
 * Bad, because adding a consumer requires a ComplyTime API configuration change.
 * Bad, because a slow or failing consumer endpoint can block or degrade ingestion.
+* Bad, because push delivery requires the consumer endpoint to be reachable; air-gapped or intermittently connected consumers cannot receive events.
 
 ## More Information
 
+* Batch ingestion is out of scope for this ADR and will be captured separately.
 * ADR-0020: Event Bus Technology Selection
 * ADR-0021: CloudEvents for Ingestion Event Envelope
 * ADR-0022: AsyncAPI for Event-Driven Interface Documentation
