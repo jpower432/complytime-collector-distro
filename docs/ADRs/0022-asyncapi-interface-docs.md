@@ -36,8 +36,8 @@ An AsyncAPI 3.0 document describing the ComplyTime API ingestion channel is publ
 ## Consequences
 
 * Good, because AsyncAPI models NATS channels and CloudEvents message schemas natively — the two specs compose without workarounds.
-* Good, because the AsyncAPI Generator produces HTML documentation and client bindings in multiple languages from the spec.
-* Good, because a machine-readable spec enables contract testing between the ComplyTime API and its consumers.
+* Good, because the AsyncAPI Generator produces HTML documentation and client bindings in multiple languages from the spec. Template maturity varies by language; the Go template is community-maintained and should be evaluated before committing to generated client output.
+* Good, because a machine-readable spec could enable contract testing between the ComplyTime API and its consumers — realizing this requires a contract testing tool (e.g., Microcks) and CI enforcement; without both, the benefit is latent.
 * Good, because AsyncAPI specification is Apache 2.0 licensed.
 * Bad, because maintaining the AsyncAPI document in sync with the implementation requires discipline — drift between spec and code is a real risk without CI enforcement.
 * Bad, because AsyncAPI 3.0 introduced breaking changes from 2.x; consumers and tooling must target the same major version.
@@ -51,6 +51,7 @@ The leading open specification for event-driven APIs. Models channels, operation
 * Good, because purpose-built for event-driven interfaces — channels and messages are first-class concepts.
 * Good, because tooling ecosystem (AsyncAPI Generator, Studio, CLI) supports documentation, validation, and code generation.
 * Bad, because spec maintenance must be kept in sync with implementation — tooling helps but does not eliminate the risk.
+* Bad, because the AsyncAPI NATS binding has not reached full parity with AsyncAPI 3.0; the binding version must be pinned and verified against 3.0 tooling before publishing the spec. AsyncAPI 2.x has better tooling parity today and should be considered if 3.0 binding gaps block adoption.
 
 ### OpenAPI
 
