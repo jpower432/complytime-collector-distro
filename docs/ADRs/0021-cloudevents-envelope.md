@@ -46,7 +46,7 @@ Ingestion events published to the NATS JetStream stream conform to the CloudEven
 A vendor-neutral specification for describing event data in a common way. Maintained by the CNCF with SDKs across major languages. Licensed Apache 2.0.
 
 * Good, because the specification is externally maintained and documented — consumers reference [cloudevents.io](https://cloudevents.io) rather than ComplyTime docs for envelope semantics.
-* Good, because NATS JetStream has native CloudEvents support.
+* Good, because the CloudEvents NATS Protocol Binding defines how to carry CloudEvents over NATS; envelope conformance is enforced at the application layer, not the broker.
 * Bad, because adopting the specification means conforming to its required attributes even for simple internal events.
 
 ### Custom JSON envelope
