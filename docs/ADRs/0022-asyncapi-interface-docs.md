@@ -2,7 +2,7 @@
 
 | Field | Value |
 |:------|:------|
-| Status | proposed |
+| Status | accepted |
 | Date | 2026-07-29 |
 | Decision-makers | @jpower432 |
 
